@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include <conio.h>
+#include <string.h>
+#include <stdlib.h>
+ 
+int opred(char* str)
+{int k;
+if (str[0]=='0') k=1; else k=0;
+if (str[strlen(str)-1]=='b') k=2;
+if (str[0]=='0' & str[1]=='x') k=3;
+return k;
+}
+ 
+int step(int a, int b)
+{int i,r;
+for (i=0, r=1; i<b; i++) r*=a;
+return r;
+}
+ 
+int main()
+ 
+{ char s[10];
+int i, a, b, l,j,sum;
+float k;
+scanf("%s",s);
+ 
+ 
+ 
+if (opred(s)==1) 
+{
+    for (i=1;i<strlen(s);i++)
+        if (s[i]>7+48)
+        {
+            printf("Error");
+            getch();
+            return 0;
+        }
+for(i=1, sum=0, a=8; i<=strlen(s)-1; i++) {
+sum+=(s[i]-'0')*step(a,strlen(s)-i-1);}
+};
+ 
+ 
+if (opred(s)==2) 
+{
+    for (i=0;i<strlen(s)-1;i++)
+        if (s[i]>1+48) 
+        {
+            printf("Error");
+            getch();
+            return 0;
+        }
+for(i=0, sum=0, a=2; i<=strlen(s)-2; i++) {
+sum+=((s[i]-'0')*step(a,strlen(s)-i-1))/2; }
+}
+if (opred(s)==0) { 
+for(i=0, sum=0, a=10; i<=strlen(s)-1; i++) {
+sum+=(s[i]-'0')*step(a,strlen(s)-i-1);}
+ 
+};
+ 
+if (opred(s)==3) { 
+for(i=2, sum=0, a=16; i<=strlen(s)-1; i++) {
+if (s[i]>='a' & s[i]<='f') sum+=(s[i]-'a'+10)*step(a,strlen(s)-i-1); else sum+=(s[i]-'0')*step(a,strlen(s)-i-1); }
+};
+printf("%d",sum); 
+getch();
+return 0;
+}
